@@ -1,0 +1,25 @@
+.form-control{
+    margin: 10px 0px;   
+   }
+   .form-control input,
+   .form-control label{
+       display:block;
+   }
+   .form-control input{
+       border:1px solid  rgb(111, 84, 136);
+       font:inherit;
+   }
+   
+   button{
+       font:inherit;
+       border: 1px solid   rgb(111, 84, 136);
+       background:white;
+       color: rgb(111, 84, 136);
+       border-radius: 3%;
+       cursor:pointer;
+   }
+   button:hover,button:active{
+       font-weight: bolder;
+       background:rgb(111, 84, 136);
+       color: white;
+   }
