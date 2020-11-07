@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 
+
 module.exports.getAddProduct = (request,response)=>{
     
     response.render('admin/add-product',{
@@ -18,13 +19,10 @@ module.exports.postAddProduct = (request,response)=>{
 
 module.exports.getProducts = (request,response)=>{
     Product.fetchAll(products=>{
-        response.render('shop/product-list',{
+        response.render('admin/products',{
             prods:products, 
-            docTitle:'WelcomeToMyShop', 
-            path:'/', 
-            hasProducts:products.length>0,
-            isShopPage:true
+            docTitle:'Admin Product List', 
+            path:'/admin/products'
         });
     });
-    
 };
