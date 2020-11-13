@@ -50,7 +50,7 @@ module.exports = class product{
             }
         });
     }
-    static deleteById(id,cb){
+    static deleteById(id){
         getProductsFromFile(products=>{
             const prodPrice = products.find(prod=>prod.id===id).price;
             const updatedProducts = products.filter(prod=>prod.id!==id);

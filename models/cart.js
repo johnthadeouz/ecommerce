@@ -38,6 +38,7 @@ module.exports = class Cart{
     static deleteProduct(id,price){
         fs.readFile(p,(err,fileContent)=>{
             if(err){
+                console.log;
                 return;
             }
             const parsedCart = JSON.parse(fileContent);
@@ -49,6 +50,16 @@ module.exports = class Cart{
             fs.writeFile(p, JSON.stringify(updatedCart), (err)=>{
                 console.log(err);
             });
+        });
+    }
+    static getCart(cb){
+        fs.readFile(p,(err,fileContent)=>{
+            if(err){
+                console.log;
+                return;
+            }
+            const parsedCart = JSON.parse(fileContent);
+            cb(parsedCart);
         });
     }
 
