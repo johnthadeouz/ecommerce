@@ -6,7 +6,15 @@
     <%if(products.length > 0){%>
         <ul>
         <%for(product of products){%>   
-        <li><a href="/products/<%=product.productData.id%>"><%=product.productData.title%></a> | amount:<%=product.amount%></li>    
+            <li style="display:flex">
+                <p><img style="max-width:40px" src="<%=product.productData.imageUrl%>" alt="<%=product.productData.title%>"></p>
+                <a href="/products/<%=product.productData.id%>"><%=product.productData.title%></a>
+                <p>amount:<%=product.amount%></p>
+                <form action="/cart-delete-product" method="POST">
+                    <input type="hidden" value="<%=product.productData.id%>" name="productId">
+                    <button type="submit" class="btn">DELETE</button>
+                </form>
+            </li> 
         <%}%>
         </ul>
         <p>TOTAL:<%=cartTotal%></p>

@@ -67,6 +67,14 @@ module.exports.addToCart = (request,response) =>{
     response.redirect('/cart');
 };
 
+module.exports.postDeleteCartProduct = (request,response)=>{
+    const productId = request.body.productId;
+    Product.fetchById(productId, product =>{
+        Cart.deleteProduct(productId,product.price);
+        response.redirect('/cart');
+    });
+};
+
 module.exports.getOrders = (request,response) =>{
     response.render('shop/orders',{
         docTitle:'Your Orders',
