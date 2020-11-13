@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 
 module.exports.getProducts = (request,response)=>{
@@ -9,6 +10,20 @@ module.exports.getProducts = (request,response)=>{
             path:'/products'
         });
     });
+    
+};
+
+module.exports.getProduct = (request,response)=>{
+    const prodId = request.params.productId;
+    Product.fetchById(prodId,product=>{
+        //console.log(product);
+        response.render('shop/product-detail',{
+            product:product, 
+            docTitle:product.title, 
+            path:'/products'
+            });
+    });
+    
     
 };
 
@@ -26,6 +41,21 @@ module.exports.getCart = (request,response) =>{
     response.render('shop/cart',{
         docTitle:'Your Cart',
         path:'/cart'
+    });
+};
+
+module.exports.addToCart = (request,response) =>{
+    const prodId = request.body.productId;
+    Product.fetchById(prodId,(product)=>{
+        Cart.addProduct(prodId, product.price);
+    });
+    response.redirect('/cart');
+};
+
+module.exports.getOrders = (request,response) =>{
+    response.render('shop/orders',{
+        docTitle:'Your Orders',
+        path:'/orders'
     });
 };
 

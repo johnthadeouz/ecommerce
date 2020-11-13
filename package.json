@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "author": "Jonatan Tadeo Calles Vargas",
-  "license": "ISC",
+  "author": "Jonatan Tadeo Calles Vargas <tadeo.calles@outlook.com> (https://kymelion.com)",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.6"
   },

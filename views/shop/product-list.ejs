@@ -12,14 +12,15 @@
                     <h1 class="product__title" id="title"><%=product.title%></h1>
                 </header>
                 <div class="card__image">
-                    <img style="max-width:100px" src="https://images-na.ssl-images-amazon.com/images/I/A1w5NbcX4yL.jpg" alt="imagebook">
+                    <img style="max-width:100px" src="<%=product.imageUrl%>" alt="<%=product.title%>">
                 </div>
                 <div class="card__content">
-                    <h2 class="product__price">$20.00</h2>
-                    <p class="product__description">A very interesting book about so many even more blablabla</p>
+                    <h2 class="product__price">$<%=product.price%></h2>
+                    <p class="product__description"><%=product.description%></p>
                 </div>
                 <div class="card__actions">
-                    <button class="btn">Add</button>
+                    <a href="/products/<%=product.id%>" class="btn">Details</a>
+                    <%- include('../includes/add-to-cart.ejs',{product:product}) %>
                 </div>
             </article>
             <% } %>

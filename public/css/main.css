@@ -56,7 +56,7 @@ main{
 .card__image img{
     max-width: 100px;
 }
-.card__actions button{
+.btn{
     padding: 0;
     border: none;
     width: 100px;
@@ -66,7 +66,7 @@ main{
     font-weight: bold;
     font-size: 25px;
 }
-.card__actions button:hover{
+.btn:hover{
     background-color:whitesmoke;
     color: rgb(89, 56, 119);
     box-shadow: 0px 5px 5px 1px rgb(89, 56, 119);
