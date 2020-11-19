@@ -19,6 +19,7 @@ CRUD
 | '/cart'                | GET  | shopping cart being used by the user. |
 | '/cart'                | POST | Add a product to the existing shopping cart. |
 | '/orders'              | GET  | Display the client's order history |
+| '/create-order'        | POST | Shopping cart is wiped out, and a new order is created with the products you selected.|
 | '/checkout'            | GET  | The flow needed to be followed by the client in order to make a purchase| 
 | '/admin/add-product'   | GET  | Display a form that need to be filled before creating a new product |
 | '/admin/add-product'   | POST | Add new product into the e-Commerce using the information of the form |
