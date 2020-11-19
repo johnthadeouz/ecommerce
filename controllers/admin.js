@@ -18,9 +18,17 @@ module.exports.postAddProduct = (request,response)=>{
     const imageUrl = request.body.imageUrl;
     const description = request.body.description;
     const price = request.body.price;
-    const product = new Product(null,title,imageUrl,description,price);
-    product.save();
-    response.redirect('/');
+    request.user.createProduct({
+        title:title,
+        price:price,
+        imageUrl:imageUrl,
+        description:description
+    })
+    .then(result=>{
+        console.log(result);
+        response.redirect('/admin/products');
+    })
+    .catch(err=>console.log(err));
 };
 
 module.exports.getEditProduct = (request,response)=>{
@@ -29,7 +37,10 @@ module.exports.getEditProduct = (request,response)=>{
         return response.redirect('/');
     }
     const productId = request.params.productId;
-    Product.fetchById(productId, product =>{
+    request.user.getProducts({where:{id:productId}})
+    //Product.findByPk(productId)
+    .then(products =>{
+        const product = products[0];
         if(!product){
             return response.redirect('/');
         }
@@ -40,7 +51,8 @@ module.exports.getEditProduct = (request,response)=>{
             product:product
         });
 
-    });
+    })
+    .catch(err => console.log(err));
 
 };
 
@@ -50,23 +62,43 @@ module.exports.postEditProduct = (request,response)=>{
     const updatedDescription = request.body.description;
     const updatedImageUrl = request.body.imageUrl;
     const updatedPrice = request.body.price;
-    const updatedProduct = new Product(productId,updatedTitle,updatedImageUrl,updatedDescription,updatedPrice);
-    updatedProduct.save();
-    response.redirect('/admin/products')
+    Product.findByPk(productId)
+    .then(product =>{
+        product.title = updatedTitle;
+        product.description = updatedDescription;
+        product.imageUrl = updatedImageUrl;
+        product.price = updatedPrice;
+        return product.save();
+    })
+    .then(result => {
+        console.log('Updated Product');
+        response.redirect('/admin/products')
+    })
+    .catch(err => console.log(err));
 }
 
 module.exports.postDeleteProduct = (request,response)=>{
     const productId = request.body.productId;
-    Product.deleteById(productId);
-    response.redirect('/admin/products');
+    Product.findByPk(productId)
+    .then(product =>{
+        return product.destroy();
+    })
+    .then(result => {
+        console.log('Product Destroyed');
+        response.redirect('/admin/products');
+    })
+
 }
 
 module.exports.getProducts = (request,response)=>{
-    Product.fetchAll(products=>{
+    request.user.getProducts()
+    //Product.findAll()
+    .then(products=>{
         response.render('admin/products',{
             prods:products, 
             docTitle:'Admin Product List', 
             path:'/admin/products'
         });
-    });
+    })
+    .catch(err=>console.log(err));
 };

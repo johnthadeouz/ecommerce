@@ -2,22 +2,26 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
-<main>
+<main class="cart-container">
     <%if(products.length > 0){%>
-        <ul>
+        <ul class="cart-list">
         <%for(product of products){%>   
             <li style="display:flex">
-                <p><img style="max-width:40px" src="<%=product.productData.imageUrl%>" alt="<%=product.productData.title%>"></p>
-                <a href="/products/<%=product.productData.id%>"><%=product.productData.title%></a>
-                <p>amount:<%=product.amount%></p>
+                <p><img style="max-width:40px" src="<%=product.imageUrl%>" alt="<%=product.title%>"></p>
+                <p><a href="/products/<%=product.id%>"><%=product.title%></a></p>
+                <p>amount:<%=product.cartItem.quantity%></p>
                 <form action="/cart-delete-product" method="POST">
-                    <input type="hidden" value="<%=product.productData.id%>" name="productId">
+                    <input type="hidden" value="<%=product.id%>" name="productId">
                     <button type="submit" class="btn">DELETE</button>
                 </form>
             </li> 
-        <%}%>
+        <%}%> 
         </ul>
         <p>TOTAL:<%=cartTotal%></p>
+        <hr>
+        <form action="/create-order" method="POST">
+            <button class="btn" type="submit">Order Now!</button>
+        </form>
     <%}else{%>
         <h1>Empty Cart!</h1>
     <%}%>

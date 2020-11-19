@@ -3,7 +3,26 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
 <main>
+    <% if(orders.length > 0){ %>
+        <ul>
+            <% orders.forEach(order=>{ %>
+            <li>
+                <p>ORDER #: <%=order.id%></p>
+                <p>CONTENT:
+                    <ul>
+                    <% order.products.forEach(product=>{ %>
+                        <li><%= product.title %> (<%= product.orderItem.quantity %>)</li>
+                    <% }); %>
+                    </ul>
+                </p>
+                <p>created at: <%=order.createdAt%></p>
+                <p>STATUS: <span style="color:gray">PENDING</span></p>
+            </li>
+            <% }); %>
+        </ul>
+    <% }else{ %>
     <h1>No orders for the moment!</h1>
+    <% } %>
 </main>
     
 <%- include('../includes/end.ejs') %>

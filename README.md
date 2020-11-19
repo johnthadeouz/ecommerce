@@ -6,6 +6,7 @@
 > USING OF THE VIEW ENGINE 'EJS' (also using import()/includes to recycle html)
 > MVC
 > API REST
+> Storing/Reading/Modifying information in MYSQL database (using 'Sequelize' ORM)
 
 # API
 CRUD
